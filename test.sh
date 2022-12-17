@@ -32,10 +32,22 @@ assert 4 '(3+5)/2'
 assert 2 '-3+5'
 assert 5 '-1+6'
 assert 0 '-1+(+6)+(-5)'
+assert 1 '1 == 1'
+assert 1 '1 != 2'
+assert 1 '2 >= 1'
+assert 1 '1 <= 2'
+assert 1 '1 < 2'
+assert 1 '2 > 1'
+assert 0 '1 == 2'
+assert 0 '1 != 1'
+assert 0 '1 >= 2'
+assert 0 '2 <= 1'
+assert 0 '2 < 1'
+assert 0 '1 > 2'
 
 if [ $success_count = $count ]; then
-  echo "Tests All Green 🎉 (All test count: $count)"; 
+  echo "Tests All Green 🎉 (All tests count: $count)"; 
 else 
-  echo "$fail_count tests failed (All test count: $count)";
+  echo "$fail_count tests failed (All tests count: $count)";
   exit 1
 fi
