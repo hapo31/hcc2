@@ -1,4 +1,8 @@
 #!/bin/bash
+
+count=0
+success_count=0
+fail_count=0
 assert() {
   expected="$1"
   input="$2"
@@ -10,10 +14,12 @@ assert() {
 
   if [ "$actual" = "$expected" ]; then
     echo "$input => $actual"
+    ((success_count += 1))
   else
     echo "$input => $expected expected, but got $actual"
-    exit 1
+    ((fail_count += 1))
   fi
+  ((count += 1))
 }
 
 assert 0 0
@@ -27,4 +33,9 @@ assert 2 '-3+5'
 assert 5 '-1+6'
 assert 0 '-1+(+6)+(-5)'
 
-echo OK
+if [ $success_count = $count ]; then
+  echo "Tests All Green 🎉 (All test count: $count)"; 
+else 
+  echo "$fail_count tests failed (All test count: $count)";
+  exit 1
+fi
